@@ -1,0 +1,11 @@
+Salary_Data<-read.csv(file.choose())
+View (Salary_Data)
+attach(Salary_Data)
+plot(YearsExperience,Salary)
+cor(Salary,YearsExperience)
+sal<-lm(Salary_Data$Salary~Salary_Data$YearsExperience)
+summary(sal)
+sal$fitted.values
+confint(sal,interval=0.95)
+predict(sal, level = "predict")
+plot(sal)
