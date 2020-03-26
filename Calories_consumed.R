@@ -1,0 +1,12 @@
+library(readxl)
+calories_consumed <- read.csv(file.choose())
+attach(calories_consumed)
+View(calories_consumed)
+plot(Weight.gained..grams.,Calories.Consumed)
+cor(Weight.gained..grams.,Calories.Consumed)
+cwr<-lm(Weight.gained..grams.~Calories.Consumed)
+summary(cwr)
+cwr$fitted.values
+confint(cwr,level=0.95)
+cwr_log<-lm(Weight.gained..grams.~log(Calories.Consumed))
+summary(cwr_log)
