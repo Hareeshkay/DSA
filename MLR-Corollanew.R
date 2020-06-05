@@ -1,0 +1,26 @@
+Corolla <-read.csv(file.choose())
+View(Corolla)
+attach(Corolla)
+#excluded unwated coloumns
+mydata<- Corolla[c("Price","Age_08_04","KM","HP","cc","Doors","Gears","Quarterly_Tax","Weight")]
+colnames(mydata)
+View(Corolla)
+summary(Corolla)
+library(corpcor)
+model <- lm(Price~., data = mydata)
+summary(model)
+library(car)
+influenceIndexPlot(model)
+influencePlot(model)
+vif(model)
+model2 <- lm(Price~., data = mydata[-c(81,222,961),])
+summary(model2)
+library(MASS)
+stepAIC(model)
+avPlots(model)
+model3 <- lm(Price ~ Age_08_04 + KM + HP + Gears + Quarterly_Tax + Weight, data = mydata[-c(81,222,961),])
+summary(model3)
+
+plot(model2)
+hist(residuals(model2))
+#model2 is final model
